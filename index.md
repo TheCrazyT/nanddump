@@ -33,6 +33,10 @@ During the process i created alot of solder bridges that needed to be removed ag
 
 The good thing about the nand-chip was that it was 8-bit only. (that means less pins to solder)
 
+Since Vcc and Vss were redundant (and because I was lazy) I decided to only solder those on the left side of the chip.
+
+Not shure if it has any effect if they are not connected on the right side, but probing those pins showed that there is nothing "between", so it should not matter.
+
 Some of the pins still had solder bridges but according to the datasheet they only bridged to NC-pins, so this does not have any effect.
 
 It took me several hours to get this right (but maybe won't need that long with better equipment).
@@ -45,6 +49,8 @@ During my search i came across the following [information](https://iosoft.blog/2
 Especially the image 
 
 ![rpi_smi_pinout.png](https://iosoftblog.files.wordpress.com/2020/07/rpi_smi_pinout.png)
+
+![8-bit_nand_HY27UF084G2B.png](8-bit_nand_HY27UF084G2B.png)
 
 helped me to figure out what needs to be connected to what pins of the chip.
 
