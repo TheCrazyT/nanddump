@@ -23,7 +23,11 @@ A lot of months later I was thinking if it is possible to still access the pins 
 
 I decided to remove that black layer with sandpaper which worked as expected.
 
-The soldering itself was much really complicated because of the pitch.
+The soldering itself was really complicated because of the pitch, avoiding solder bridges was really a pain.
+
+![31.03.2021_right4.png](31.03.2021_right4.png)
+
+(ignore the copper wires on the edges, just needed them to hold the chip in place)
 
 During the process i created alot of solder bridges that needed to be removed again.
 
