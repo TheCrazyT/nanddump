@@ -98,13 +98,13 @@ Example layout of first block (hexadecimal representation):
   
 [2048 bytes of data]
 
-``FF 00 00 00 00 FC FF FF`` **E8 9E A9 00 B6 92 49 22**
+FF 00 00 00 00 FC FF FF **E8 9E A9 00 B6 92 49 22**
 
 **C2 55 19 50 ED 69 14 A9 2B DB BE F6 5B 24 98 34**
 
-**7F**`` ``**C3 4F A2 0F 34 CE 8D 8C A6 55 00 94 7C 88 B8**
+**7F** | **C3 4F A2 0F 34 CE 8D 8C A6 55 00 94 7C 88 B8**
 
-**3A D7 09 ED EF FC** ``00 00 FF FF FF FF FF FF FF FF``
+**3A D7 09 ED EF FC** 00 00 FF FF FF FF FF FF FF FF
 
 The 2 bold marked texts are 2 ECC-sections (using [bch] (https://en.wikipedia.org/wiki/BCH_code) encoding).
 
