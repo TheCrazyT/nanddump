@@ -82,6 +82,8 @@ Because most nand-chip-data have a custom layout, you need to dump with outofban
 sudo nanddump -o -n --length=536870912 --bb dumpbad -f nand_oob /dev/mtd0
 ```
 
+(Note: in my case it was a 512MB-nand ... so ``536870912=512*1024*1024``)
+
 Later you would need to remove the out of band data (and optionally check the ecc against the data).
 
 If you use no out-of-band-data the current system would assume that it has a default-layout and will incorrectly check the [ecc](https://en.wikipedia.org/wiki/Error_correction_code).
