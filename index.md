@@ -96,7 +96,7 @@ The layout itself is actually defined by the flashcontroller.(or could be define
 
 ### Understanding the dumped data
 
-Example layout of first block (hexadecimal representation):
+Example layout of first block (hexadecimal representation, [binary of first block](block1.bin)):
   
 [2048 bytes of data]
 
