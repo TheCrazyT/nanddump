@@ -74,3 +74,57 @@ sudo modprobe bcm2835_smi_nand
 * talking about figuring out the ecc-algo used
 * first try with [python-bchlib] (https://github.com/jkent/python-bchlib)
   * problems/bugs ... bitswap -> writing raw c-programm by using kernel files ([bch.c](https://github.com/raspberrypi/linux/blob/rpi-5.10.y/lib/bch.c), [bch.h](https://github.com/raspberrypi/linux/blob/rpi-5.10.y/include/linux/bch.h))
+
+### Using nanddump
+Because most nand-chip-data have a custom layout, you need to dump with outofband-data and "dumpbad".
+
+```
+sudo nanddump -o -n --length=536870912 --bb dumpbad -f nand_oob /dev/mtd0
+```
+
+Later you would need to remove the out of band data (and optionally check the ecc against the data).
+
+If you use no out-of-band-data the current system would assume that it has a default-layout and will incorrectly check the [ecc](https://en.wikipedia.org/wiki/Error_correction_code).
+
+The reason for this is that it assumes the ecc to be at a default location (and I could assure you it won't be at that location, atleast not on random nand-chips of other devices).
+
+This means you will get lots of error messages on ``dmesg`` telling you that the block is incorrect/damages(although in most times it isn't).
+
+The layout itself is actually defined by the flashcontroller.(or could be defined by the system itself)
+
+### Understanding the dumped data
+
+Example layout of first block:
+
+ 
+[2048 bytes of data]
+
+``FF 00 00 00 00 FC FF FF`` <span style="color:orange;">``E8 9E A9 00 B6 92 49 22``</span>
+
+<span style="color:orange;">``C2 55 19 50 ED 69 14 A9 2B DB BE F6 5B 24 98 34``</span>
+
+<span style="color:orange;">``7F``</span> <span style="color:blue;">``C3 4F A2 0F 34 CE 8D 8C A6 55 00 94 7C 88 B8``</span>
+
+<span style="color:blue;">``3A D7 09 ED EF FC``</span> ``00 00 FF FF FF FF FF FF FF FF``
+
+Orange and blue colored text are 2 ECC-sections (using [bch] (https://en.wikipedia.org/wiki/BCH_code) encoding).
+
+The first refers to the first 1024 of data and the 2nd for the next 1024 of data.
+
+Also take a look at page 305 of [SiRFatlasV-Datasheet](http://gps.0xdc.ru/static/sirf/doc/SirfAtlas/CS-130805-DS%20SiRFatlasV%20Datasheet.pdf) (Section "ECC Data in NAND Format" - "Figure 61: 2048+64 Bytes/Page with 12-bit BCH ECC Data Format").
+
+It helps to understand why those are BCH-ECC.
+
+It is important to understand that the layout is different for every embedded device!
+
+So understanding the right layout is important ... a datasheet helps alot.
+
+Of course you could also try to "guess" the layout, but thats probably much harder.
+
+(although it might not be impossible with the right blocks of data, like only zeros)
+
+The location of the out-of-band-data section (or OOB) is defined by the nand-chip-type itself.
+
+If you take a look at the [Datasheet](https://docs.rs-online.com/9e99/0900766b80d6fc8b.pdf) of the nand-chip you might see the information "2K + 64 spare".
+
+That basically means each block has 2048 Bytes of data and 64 out-of-band-data.
