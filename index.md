@@ -108,7 +108,7 @@ FF 00 00 00 00 FC FF FF **E8 9E A9 00 B6 92 49 22**
 
 **3A D7 09 ED EF FC** 00 00 FF FF FF FF FF FF FF FF
 
-The 2 bold marked texts are 2 ECC-sections (using [bch] (https://en.wikipedia.org/wiki/BCH_code) encoding).
+The 2 bold marked texts are 2 ECC-sections (using [bch](https://en.wikipedia.org/wiki/BCH_code) encoding).
 
 The first refers to the first 1024 of data and the 2nd for the next 1024 of data.
 
