@@ -1,3 +1,15 @@
+# Table of contents
+- [Nand dumping on raspberry pi over smi](#nand-dumping-on-raspberry-pi-over-smi)
+  * [Requirements](#requirements)
+  * [My preperations](#my-preperations)
+  * [Finding the information needed](#finding-the-information-needed)
+  * [TODO instructions](#todo-instructions)
+    + [Using nanddump](#using-nanddump)
+    + [Understanding the dumped data](#understanding-the-dumped-data)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 # Nand dumping on raspberry pi over smi
 
 ## Requirements
@@ -64,16 +76,17 @@ sudo dtoverlay smi-nand
 sudo modprobe bcm2835_smi_nand
 ```
 
-## TODO instructions, talking about oob/ecc/bch, images and stuff ...
-* run build_and_install_misc.sh and build_and_install_raw_nand.sh
-* run sudo dtoverlay smi-nand
-* talking about random readid issues
-* talking about using readid to figure out which pin is connected incorrectly (-> resolder)
-* talking about data to figure out which pin is connected incorrectly (-> resolder)
-* talking about still existing byte-shift problem
-* talking about figuring out the ecc-algo used
-* first try with [python-bchlib] (https://github.com/jkent/python-bchlib)
-  * problems/bugs ... bitswap -> writing raw c-programm by using kernel files ([bch.c](https://github.com/raspberrypi/linux/blob/rpi-5.10.y/lib/bch.c), [bch.h](https://github.com/raspberrypi/linux/blob/rpi-5.10.y/include/linux/bch.h))
+## TODO instructions
+* talking about oob/ecc/bch, images and stuff:
+    * run build_and_install_misc.sh and build_and_install_raw_nand.sh
+    * run sudo dtoverlay smi-nand
+    * talking about random readid issues
+    * talking about using readid to figure out which pin is connected incorrectly (-> resolder)
+    * talking about data to figure out which pin is connected incorrectly (-> resolder)
+    * talking about still existing byte-shift problem
+    * talking about figuring out the ecc-algo used
+    * first try with [python-bchlib] (https://github.com/jkent/python-bchlib)
+    * problems/bugs ... bitswap -> writing raw c-programm by using kernel files ([bch.c](https://github.com/raspberrypi/linux/blob/rpi-5.10.y/lib/bch.c), [bch.h](https://github.com/raspberrypi/linux/blob/rpi-5.10.y/include/linux/bch.h))
 
 ### Using nanddump
 Because most nand-chip-data have a custom layout, you need to dump with outofband-data and "dumpbad".
@@ -128,4 +141,13 @@ The location of the out-of-band-data section (or OOB) is defined by the nand-chi
 
 If you take a look at the [Datasheet](https://docs.rs-online.com/9e99/0900766b80d6fc8b.pdf) of the nand-chip you might see the information "2K + 64 spare".
 
-That basically means each block has 2048 Bytes of data and 64 out-of-band-data.
+That basically means each block has 2048 bytes of data and 64 out-of-band-data.
+
+So if you dump with "nand_oob" you have oob-data in between that you can use to correct the actual data.
+
+If you just do not care about error correction, you could just strip the oob-data from within that dump.
+
+That would be possible by a script that reads 2048 bytes of data, skips the next 64 byte, reads the next 2048 bytes of data and so on ... (keep in mind that 2048 might be a different number for your nand-chip - if you are too lazy, maybe [this script](https://github.com/Hitsxx/NandTool/blob/master/Nand-dump-tool.py) will help with that)
+
+Incase you just do not know the method used for error correction you could also just dump multiple times and compare those dumps to find the errors.  ( [this script](https://github.com/Hitsxx/NandTool/blob/master/firmware-reconstruct.py) might be useful )
+
