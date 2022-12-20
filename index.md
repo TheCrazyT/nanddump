@@ -106,7 +106,7 @@ If you use no out-of-band-data the current system would assume that it has a def
 
 The reason for this is that it assumes the ecc to be at a default location (and I could assure you it won't be at that location, atleast not on random nand-chips of other devices).
 
-This means you will get lots of error messages on ``dmesg`` telling you that the block is incorrect/damages(although in most times it isn't).
+This means you will get lots of [error messages](https://filedn.eu/lYSpEcvitT17eGF7Dm10Igh/raspberrypi-kernel_1.20221104-nand/dmesg.txt) on ``dmesg`` telling you that the block is incorrect/damages(although in most times it isn't).
 
 The layout itself is actually defined by the flashcontroller.(or could be defined by the system itself)
 
