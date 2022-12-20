@@ -14,7 +14,10 @@
 
 ## Requirements
 
-* [modified linux kernel modules](https://github.com/TheCrazyT/linux/tree/raspberrypi-kernel_1.20210303-1-nand) (linux-raspberrypi-kernel_1.20210303-1 ; 5.10.17-v7+)
+* kernels:
+  * [raspberrypi-kernel_1.20210303-1](https://github.com/TheCrazyT/linux/tree/raspberrypi-kernel_1.20210303-1-nand) (linux-raspberrypi-kernel_1.20210303-1 ; 5.10.17-v7+)
+  * [raspberrypi-kernel_1.20221104](https://github.com/TheCrazyT/linux/tree/raspberrypi-kernel_1.20221104-nand) (linux-raspberrypi-kernel_1.20221104 ; 5.15.76-v7+)
+    * [zImage](https://filedn.eu/lYSpEcvitT17eGF7Dm10Igh/raspberrypi-kernel_1.20221104-nand/zImage) for "Raspberry Pi OS" bullseye 32-bit
 * 8-bit nand-chip (in my case: [HY27UF084G2B](https://docs.rs-online.com/9e99/0900766b80d6fc8b.pdf)) + datasheet
   * a 16-bit nand-chip will need a lot more pins, beside the soldering problems you probably need a bi-directional multiplexer!
     this increases complexity and I'm not shure if the bcm2835_smi_nand-driver can handle that (but I guess those nand-chips are more common nowadays)
