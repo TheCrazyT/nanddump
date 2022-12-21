@@ -61,13 +61,19 @@ It took me several hours to get this right (but maybe won't need that long with 
 
 During my search i came across the following [information](https://iosoft.blog/2020/07/16/raspberry-pi-smi/).
 
-Especially the image 
+Especially the images: 
 
 ![rpi_smi_pinout.png](https://iosoftblog.files.wordpress.com/2020/07/rpi_smi_pinout.png)
+
+![rpi_smi_pins-2.png](https://iosoftblog.files.wordpress.com/2020/07/rpi_smi_pins-2.png)
 
 ![8-bit_nand_HY27UF084G2B.png](8-bit_nand_HY27UF084G2B.png)
 
 helped me to figure out what needs to be connected to what pins of the chip.
+
+TODO: 
+* explain missing information in rpi_smi_pinout.png about SA0 and SA1 (SMI_NAND_CLE_PIN and SMI_NAND_ALE_PIN) by the source of bcm2835_smi_nand.c
+* need a proper pinout-mapping picture
 
 The reason I added kernel version information to this page is because the smi-support for nand-chips was [dropped](https://github.com/raspberrypi/linux/commit/72ce5a4330588174a0e138c1a87626bf16217020) in later kernels.
 
