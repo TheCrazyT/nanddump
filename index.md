@@ -21,7 +21,7 @@
 * 8-bit nand-chip (in my case: [HY27UF084G2B](https://docs.rs-online.com/9e99/0900766b80d6fc8b.pdf)) + datasheet
   * a 16-bit nand-chip will need a lot more pins, beside the soldering problems you probably need a bi-directional multiplexer!
     this increases complexity and I'm not shure if the bcm2835_smi_nand-driver can handle that (but I guess those nand-chips are more common nowadays)
-* datasheet of the chip/flashcontroller (in my case: [SiRFatlasV](http://gps.0xdc.ru/static/sirf/doc/SirfAtlas/CS-130805-DS%20SiRFatlasV%20Datasheet.pdf) - flashcontroller was integrated inside the chip)
+* datasheet of the chip/flashcontroller (in my case: [SiRFatlasV](https://web.archive.org/web/20210923154401/https://gps.0xdc.ru/static/sirf/doc/SirfAtlas/CS-130805-DS%20SiRFatlasV%20Datasheet.pdf) - flashcontroller was integrated inside the chip)
    * actually only the info about the structure of OOB is needed (page 305 of mentioned document)
 
 ## My preperations
@@ -128,7 +128,7 @@ The 2 bold marked texts are 2 ECC-sections (using [bch](https://en.wikipedia.org
 
 The first refers to the first 1024 of data and the 2nd for the next 1024 of data.
 
-Also take a look at page 305 of [SiRFatlasV-Datasheet](http://gps.0xdc.ru/static/sirf/doc/SirfAtlas/CS-130805-DS%20SiRFatlasV%20Datasheet.pdf) (Section "ECC Data in NAND Format" - "Figure 61: 2048+64 Bytes/Page with 12-bit BCH ECC Data Format").
+Also take a look at page 305 of [SiRFatlasV-Datasheet](https://web.archive.org/web/20210923154401/https://gps.0xdc.ru/static/sirf/doc/SirfAtlas/CS-130805-DS%20SiRFatlasV%20Datasheet.pdf) (Section "ECC Data in NAND Format" - "Figure 61: 2048+64 Bytes/Page with 12-bit BCH ECC Data Format").
 
 It helps to understand why those are BCH-ECC.
 
