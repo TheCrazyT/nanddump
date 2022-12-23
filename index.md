@@ -98,6 +98,13 @@ sudo modprobe bcm2835_smi_nand
     * problems/bugs ... bitswap -> writing raw c-programm by using kernel files ([bch.c](https://github.com/raspberrypi/linux/blob/rpi-5.10.y/lib/bch.c), [bch.h](https://github.com/raspberrypi/linux/blob/rpi-5.10.y/include/linux/bch.h))
 
 ### Using nanddump
+
+Before using it you need to install it with:
+
+```
+sudo apt-get install mtd-utils
+```
+
 Because most nand-chip-data have a custom layout, you need to dump with outofband-data and "dumpbad".
 
 ```
